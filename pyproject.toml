@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "specplotter"
+version = "0.0.0"
+description = "A tool for creating wideband spectrograms with signal analysis"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+keywords = ["spectrogram", "audio", "signal-processing", "librosa", "scipy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+    "numpy>=1.19.0",
+    "scipy>=1.5.0",
+    "librosa>=0.8.0",
+    "matplotlib>=3.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black",
+    "flake8",
+    "python-semantic-release[build]",
+]
+
+[project.urls]
+Homepage = "https://github.com/juice500ml/specplotter"
+Documentation = "https://github.com/juice500ml/specplotter#readme"
+Repository = "https://github.com/juice500ml/specplotter"
+Issues = "https://github.com/juice500ml/specplotter/issues"
+
+[tool.setuptools]
+packages = ["specplotter"]
+
+[tool.setuptools.package-data]
+specplotter = []
+
+[project.scripts]
+specplotter = "specplotter.cli:main"
+
+[tool.semantic_release]
+version_variable = [
+    "specplotter/__init__.py:__version__",
+    "pyproject.toml:project.version"
+]
+build_command = "python -m build"
+dist_path = "dist"
+commit_author = "github-actions <github-actions@users.noreply.github.com>"
+upload_to_vcs_release = true
+upload_to_pypi = true
+hvcs = "github"
+remote = "origin"
+tag_commit = true
+changelog_file = "CHANGELOG.md"
