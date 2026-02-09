@@ -35,31 +35,28 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
+    - name: Sync version with latest tag
+      run: |
+        LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+        if [ -n "$LATEST_TAG" ]; then
+          VERSION="${LATEST_TAG#v}"
+          sed -i.bak "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
+          if grep -q "__version__" specplotter/__init__.py; then
+            sed -i.bak "s/__version__ = \".*\"/__version__ = \"$VERSION\"/" specplotter/__init__.py
+          fi
+          rm -f pyproject.toml.bak specplotter/__init__.py.bak 2>/dev/null || true
+        fi
+
     - name: Run semantic release version
       id: semantic_release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        # Debug: show current commit and tags
-        echo "Current commit: $(git rev-parse HEAD)"
-        echo "Latest tag: $(git describe --tags --abbrev=0 2>/dev/null || echo 'no tags found')"
-        echo "Recent commits:"
-        git log --oneline -10
-
-        # Run semantic-release version
-        if semantic-release version; then
-          # Check if version was updated
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "no_release=false" >> $GITHUB_OUTPUT
-            echo "Version updated successfully"
-            git diff
-          else
-            echo "no_release=true" >> $GITHUB_OUTPUT
-            echo "No version update needed"
-          fi
+        semantic-release version || true
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "no_release=false" >> $GITHUB_OUTPUT
         else
           echo "no_release=true" >> $GITHUB_OUTPUT
-          echo "semantic-release version failed or no version bump needed"
         fi
 
     - name: Build package
