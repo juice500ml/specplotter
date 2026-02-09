@@ -1,16 +1,10 @@
 # SpecPlotter
 
-A Python package for creating wideband and narrowband spectrograms with comprehensive signal analysis features.
+![UTCS](https://raw.githubusercontent.com/juice500ml/specplotter/main/images/UTCS.jpg)
 
-## Features
+A Python package for creating spectrograms that looks good.
+Its parameters are carefully tuned by [David Harwath](https://saltlab.cs.utexas.edu/) to resemble the appearance of physically produced spectrograms, e.g., [Kay Sona-Graph](https://earbirding.com/blog/archives/1229).
 
-- **Wideband and narrowband spectrogram generation** - Switch between analysis modes
-- **Modular signal processing** - Compute individual features independently
-- **Flexible plotting** - Choose which components to display
-- **Zero crossing rate analysis** - Optional ZCR visualization
-- **Energy analysis** - Total energy and low-frequency energy calculations
-- **Waveform visualization** - Optional waveform display
-- **Fully configurable** - All parameters are customizable
 
 ## Installation
 
