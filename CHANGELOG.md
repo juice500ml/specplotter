@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.1.1 (2026-02-09)
+
+### Bug Fixes
+
+- Test merge
+  ([`4b113fb`](https://github.com/juice500ml/specplotter/commit/4b113fbb42ceef50aa379d79225febd328dbc47c))
+
+
 ## v1.1.0 (2026-02-09)
 
 ### Features
