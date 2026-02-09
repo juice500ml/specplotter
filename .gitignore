@@ -67,6 +67,3 @@ Thumbs.db
 *.png
 *.jpg
 *.pdf
-
-# python-semantic-release
-CHANGELOG.md
