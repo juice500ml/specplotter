@@ -4,6 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "specplotter"
+# Version is managed by python-semantic-release from git tags
+# This placeholder will be updated automatically by semantic-release
 version = "0.0.0"
 description = "A tool for creating wideband spectrograms with signal analysis"
 readme = "README.md"
