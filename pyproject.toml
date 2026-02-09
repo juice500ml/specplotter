@@ -67,6 +67,5 @@ commit_author = "github-actions <github-actions@users.noreply.github.com>"
 upload_to_vcs_release = true
 upload_to_pypi = true
 hvcs = "github"
-remote = "origin"
 tag_commit = true
 changelog_file = "CHANGELOG.md"
