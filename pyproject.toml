@@ -36,8 +36,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=6.0",
-    "black",
-    "flake8",
+    "ruff",
+    "pre-commit",
     "python-semantic-release[build]",
 ]
 
@@ -55,6 +55,13 @@ specplotter = []
 
 [project.scripts]
 specplotter = "specplotter.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
 
 [tool.semantic_release]
 version_variable = [

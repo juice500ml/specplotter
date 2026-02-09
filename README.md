@@ -414,6 +414,61 @@ git commit -m "feat!: change API for plot_spectrogram method"
 git commit -m "docs: update installation instructions"
 ```
 
+## Testing
+
+Run tests using pytest:
+
+```bash
+# Install development dependencies
+pip install -e ".[dev]"
+
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run specific test file
+pytest tests/test_specplotter.py
+```
+
+The test suite includes:
+- Unit tests for SpecPlotter initialization and configuration
+- Tests for spectrogram computation
+- Tests for plotting functionality
+- Tests for CLI interface
+- Tests for error handling
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+### Setting up pre-commit hooks
+
+This project uses pre-commit hooks to ensure code quality. To set them up:
+
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Install the git hooks
+pre-commit install
+
+# Or run manually
+pre-commit run --all-files
+```
+
+The pre-commit hooks will automatically:
+- Remove trailing whitespace
+- Fix end-of-file issues
+- Check YAML, JSON, and TOML syntax
+- Format code with ruff
+- Run ruff linting (with auto-fix)
+- Check for merge conflicts
+
+### Before submitting
+
+1. Run the test suite: `pytest`
+2. Run pre-commit hooks: `pre-commit run --all-files`
+3. Ensure all tests pass
+4. Ensure code formatting is correct
