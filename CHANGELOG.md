@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.1.6 (2026-02-14)
+
+### Bug Fixes
+
+- Trigger build
+  ([`23f9e22`](https://github.com/juice500ml/specplotter/commit/23f9e2231a05cdc81a3788874aaf6af450d89ec4))
+
+
 ## v1.1.5 (2026-02-14)
 
 ### Bug Fixes
