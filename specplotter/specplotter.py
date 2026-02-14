@@ -311,7 +311,7 @@ class SpecPlotter(object):
         ax.imshow(spectrogram, cmap=cmap, extent=extent, aspect="auto")
         ax.set_ylabel("Frequency (kHz)")
         ax.set_xticks(np.arange(0, n_sec, 0.1))
-        ax.tick_params(labelbottom=False, labelleft=True, labelright=True)
+        ax.tick_params(labelbottom=False, labelleft=True, labelright=False)
         ax.grid(color="k", linestyle="dotted", linewidth=0.5)
         show_annotation = kwargs.get("show_annotation", True)
         if show_annotation:
