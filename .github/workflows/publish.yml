@@ -74,8 +74,13 @@ jobs:
     - name: Build package
       if: steps.semantic_release.outputs.no_release != 'true'
       run: |
+        # Clean any previous build artifacts
+        rm -rf dist/ build/ *.egg-info specplotter.egg-info
         python -m pip install build
         python -m build
+        # Verify only the correct version files are built
+        echo "Built files:"
+        ls -la dist/
 
     - name: Create GitHub release
       if: steps.semantic_release.outputs.no_release != 'true'
