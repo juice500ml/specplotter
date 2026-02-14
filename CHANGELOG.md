@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.1.10 (2026-02-14)
+
+### Bug Fixes
+
+- Remove label right
+  ([`a8a502b`](https://github.com/juice500ml/specplotter/commit/a8a502b6ad26fbad786aef8c35a45a0b451b8d86))
+
+
 ## v1.1.9 (2026-02-14)
 
 ### Bug Fixes
