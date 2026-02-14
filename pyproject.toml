@@ -1,12 +1,12 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0", "setuptools-scm>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "specplotter"
-# Version is managed by python-semantic-release from git tags
-# This placeholder will be updated automatically by semantic-release
-version = "0.0.0"
+# Version is read from git tags via setuptools-scm at build time
+# Git tags are the single source of truth for versioning
+dynamic = ["version"]
 description = "A tool for creating wideband spectrograms with signal analysis"
 readme = "README.md"
 requires-python = ">=3.7"
@@ -52,6 +52,9 @@ Issues = "https://github.com/juice500ml/specplotter/issues"
 [tool.setuptools]
 packages = ["specplotter"]
 
+[tool.setuptools_scm]
+write_to = "specplotter/_version.py"
+
 [tool.setuptools.package-data]
 specplotter = []
 
@@ -66,10 +69,9 @@ python_functions = ["test_*"]
 addopts = "-v --tb=short"
 
 [tool.semantic_release]
-version_variable = [
-    "specplotter/__init__.py:__version__",
-    "pyproject.toml:project.version"
-]
+# No version_variable needed - git tags are the single source of truth
+# semantic-release only creates tags, setuptools-scm reads from tags at build time
+version_variable = []
 build_command = "python -m build"
 dist_path = "dist"
 commit_author = "github-actions <github-actions@users.noreply.github.com>"
