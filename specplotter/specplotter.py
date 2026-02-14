@@ -313,8 +313,10 @@ class SpecPlotter(object):
         ax.set_xticks(np.arange(0, n_sec, 0.1))
         ax.tick_params(labelbottom=False, labelleft=True, labelright=True)
         ax.grid(color="k", linestyle="dotted", linewidth=0.5)
-        mode_label = "Wide Band" if self.mode == "wideband" else "Narrow Band"
-        ax.annotate(f"{mode_label} Spectrogram", (0.01, 7.7))
+        show_annotation = kwargs.get("show_annotation", True)
+        if show_annotation:
+            mode_label = "Wide Band" if self.mode == "wideband" else "Narrow Band"
+            ax.annotate(f"{mode_label} Spectrogram", (0.01, 7.7))
         return ax
 
     def plot_waveform(
@@ -346,6 +348,7 @@ class SpecPlotter(object):
         show_total_energy: bool = False,
         show_lowfreq_energy: bool = False,
         show_waveform: bool = False,
+        show_annotation: bool = True,
         outfile: Optional[str] = None,
         **kwargs,
     ) -> Tuple[plt.Figure, Dict[str, Axes]]:
@@ -370,6 +373,8 @@ class SpecPlotter(object):
             Whether to show low frequency energy plot
         show_waveform : bool, default False
             Whether to show waveform plot
+        show_annotation : bool, default True
+            Whether to show the mode annotation on the spectrogram
         outfile : str, optional
             If provided, save figure to file instead of displaying
         **kwargs
@@ -466,6 +471,7 @@ class SpecPlotter(object):
                     features["spectrogram"],
                     signal.shape[0],
                     axes["spectrogram"],
+                    show_annotation=show_annotation,
                     **kwargs,
                 )
             elif plot_name == "waveform":
