@@ -55,6 +55,13 @@ jobs:
 
             # Push the tag to remote so setuptools-scm can see it
             git push origin "$TAG_AFTER" || echo "Tag may already exist on remote"
+
+            # Verify we're on the tagged commit (tag is created on current HEAD)
+            if git describe --exact-match --tags HEAD >/dev/null 2>&1; then
+              echo "Current commit is tagged: $TAG_AFTER"
+            else
+              echo "Warning: Current commit is not the tagged commit"
+            fi
           else
             echo "no_release=true" >> $GITHUB_OUTPUT
             echo "No version bump needed (tag before: $TAG_BEFORE, tag after: $TAG_AFTER)"
@@ -62,20 +69,6 @@ jobs:
         else
           echo "no_release=true" >> $GITHUB_OUTPUT
           echo "semantic-release version exited with error or no version bump needed"
-        fi
-
-    - name: Checkout tagged commit for build
-      if: steps.semantic_release.outputs.no_release != 'true'
-      run: |
-        TAG="${{ steps.semantic_release.outputs.tag }}"
-        if [ -n "$TAG" ]; then
-          # Fetch the tag from remote
-          git fetch origin "$TAG"
-          # Checkout the tagged commit so setuptools-scm can read the version
-          git checkout "$TAG"
-          echo "Checked out tag: $TAG"
-          # Verify we're on the tag
-          git describe --exact-match --tags HEAD || echo "Warning: HEAD is not on a tag"
         fi
 
     - name: Build package
