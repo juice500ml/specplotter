@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.1.7 (2026-02-14)
+
+### Bug Fixes
+
+- Fix build pipeline
+  ([`0dd34dd`](https://github.com/juice500ml/specplotter/commit/0dd34dd807fa36969ec4715f7c4b06d1e5ee3016))
+
+
 ## v1.1.6 (2026-02-14)
 
 ### Bug Fixes
