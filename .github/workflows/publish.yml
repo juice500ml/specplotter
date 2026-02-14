@@ -44,16 +44,17 @@ jobs:
 
         # Run semantic-release version - it will create a git tag if version bump is needed
         # Since we're using setuptools-scm, we don't need to update version files
-        if semantic-release version; then
-          # Fetch the newly created tag
-          git fetch --tags
-
+        # Use --no-vcs-release to prevent creating release here (publish step handles it)
+        if semantic-release version --no-vcs-release; then
           # Check if a new tag was created
           TAG_AFTER=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           if [ "$TAG_AFTER" != "$TAG_BEFORE" ] && [ -n "$TAG_AFTER" ]; then
             echo "no_release=false" >> $GITHUB_OUTPUT
             echo "tag=$TAG_AFTER" >> $GITHUB_OUTPUT
             echo "New version tag created: $TAG_AFTER"
+
+            # Push the tag to remote so setuptools-scm can see it
+            git push origin "$TAG_AFTER" || echo "Tag may already exist on remote"
           else
             echo "no_release=true" >> $GITHUB_OUTPUT
             echo "No version bump needed (tag before: $TAG_BEFORE, tag after: $TAG_AFTER)"
@@ -63,13 +64,18 @@ jobs:
           echo "semantic-release version exited with error or no version bump needed"
         fi
 
-    - name: Checkout tagged commit
+    - name: Checkout tagged commit for build
       if: steps.semantic_release.outputs.no_release != 'true'
       run: |
         TAG="${{ steps.semantic_release.outputs.tag }}"
         if [ -n "$TAG" ]; then
+          # Fetch the tag from remote
+          git fetch origin "$TAG"
+          # Checkout the tagged commit so setuptools-scm can read the version
           git checkout "$TAG"
           echo "Checked out tag: $TAG"
+          # Verify we're on the tag
+          git describe --exact-match --tags HEAD || echo "Warning: HEAD is not on a tag"
         fi
 
     - name: Build package
