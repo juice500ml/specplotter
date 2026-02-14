@@ -2,6 +2,17 @@
 
 <!-- version list -->
 
+## v1.1.2 (2026-02-14)
+
+### Bug Fixes
+
+- Fix readme
+  ([`7222ebc`](https://github.com/juice500ml/specplotter/commit/7222ebcfd7bb51fdca8e07e55df2ea063bb52b46))
+
+- Make annotation to be optional
+  ([`61df9be`](https://github.com/juice500ml/specplotter/commit/61df9be06ad0c99e09ab4878e39d8446fb1b67ec))
+
+
 ## v1.1.1 (2026-02-09)
 
 ### Bug Fixes
