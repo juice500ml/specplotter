@@ -12,7 +12,8 @@ readme = "README.md"
 requires-python = ">=3.7"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "Kwanghee Choi", email = "juice500ml@gmail.com"},
+    {name = "David Harwath", email = "harwath@utexas.edu"},
 ]
 keywords = ["spectrogram", "audio", "signal-processing", "librosa", "scipy"]
 classifiers = [
